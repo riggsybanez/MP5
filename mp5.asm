@@ -1,5 +1,5 @@
 section .bss
-    buffer resb 1
+    input_char resb 1
 
 section .text
     global _start
@@ -8,36 +8,36 @@ _start:
     
     mov eax, 3           
     mov ebx, 0           
-    mov ecx, buffer      
+    mov ecx, input_char      
     mov edx, 1          
     int 80h             
 
-    cmp byte [buffer], 'a'
+    cmp byte [input_char], 'a'
     jl character_not_uppercase
-    cmp byte [buffer], 'z'
+    cmp byte [input_char], 'z'
     jg character_not_uppercase
 
-    sub byte [buffer], 32 
+    sub byte [input_char], 32 
 
     mov eax, 4           
     mov ebx, 1          
-    mov ecx, buffer      
+    mov ecx, input_char      
     mov edx, 1           
     int 80h 
     jmp system_exit
 
     character_not_uppercase:
 
-    cmp byte [buffer], 'A'
+    cmp byte [input_char], 'A'
     jl not_a_character
-    cmp byte [buffer], 'Z'
+    cmp byte [input_char], 'Z'
     jg not_a_character
 
-    add byte [buffer], 32
+    add byte [input_char], 32
 
     mov eax, 4           
     mov ebx, 1          
-    mov ecx, buffer      
+    mov ecx, input_char      
     mov edx, 1           
     int 80h 
     jmp system_exit
@@ -46,7 +46,7 @@ not_a_character:
 
     mov eax, 4           
     mov ebx, 1          
-    mov ecx, buffer      
+    mov ecx, input_char      
     mov edx, 1           
     int 80h      
 

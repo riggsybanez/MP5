@@ -35,6 +35,12 @@ _start:
 
     add byte [buffer], 32
 
+    mov eax, 4           
+    mov ebx, 1          
+    mov ecx, buffer      
+    mov edx, 1           
+    int 80h 
+    jmp system_exit
 
 not_a_character:
 
@@ -46,6 +52,5 @@ not_a_character:
 
 system_exit:
     mov eax, 1           
-
 
 
